@@ -1,0 +1,49 @@
+package com.mechanitis.demo.ui;
+
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Component;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
+@Component
+public class StageInitializer implements ApplicationListener<StockChartApplication.StageReadyEvent> {
+
+    private ApplicationContext applicationContext;
+    private String applicationTitle;
+
+    StageInitializer(ApplicationContext applicationContext,
+                     @Value("${spring.application.ui.title}") String applicationTitle) {
+    	log.info("StageInitializer constructor !");
+        this.applicationContext = applicationContext;
+        this.applicationTitle = applicationTitle;
+    }
+
+    @Override
+    public void onApplicationEvent(StockChartApplication.StageReadyEvent stageReadyEvent) {
+    	log.info("StageInitializer.onApplicationEvent !");
+    	
+        try {
+            Stage stage = stageReadyEvent.getStage();
+            FXMLLoader fxmlLoader = new FXMLLoader(new ClassPathResource("/chart.fxml").getURL());
+            fxmlLoader.setControllerFactory(aClass -> this.applicationContext.getBean(aClass));
+
+            Parent load = fxmlLoader.load();
+            stage.setScene(new Scene(load, 800, 600));
+            stage.setTitle(applicationTitle);
+            stage.show();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}

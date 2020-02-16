@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;module-info.java&apos; to &apos;ui/src/main/java/com.mechanitis.demo.ui&apos;&#x0A;- Original project: &apos;kumc-data-view&apos;&#x0A;- Destination element: &apos;ui/src/main/java/com.mechanitis.demo.ui&apos;&#x0A;- Original element: &apos;module-info.java&apos;" description="Copy compilation unit" destination="=ui/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.mechanitis.demo.ui" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;{module-info.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1579698996420" units="1" version="1.0"/>
+</session>
